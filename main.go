@@ -17,7 +17,7 @@ func main() {
 		fmt.Println("Error initialize cloudinary, " + initCldErr.Error())
 	}
 
-	urlImg, urlErr := pkgcld.Get(ctx, cld, "joel")
+	urlImg, urlErr := pkgcld.Get(ctx, cld, "messi")
 	if urlErr != nil {
 		fmt.Println("Error: " + urlErr.Error())
 	}
