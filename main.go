@@ -1,12 +1,9 @@
 package main
 
 import (
-	"context"
 	"fmt"
-	"os"
 
-	"github.com/cloudinary/cloudinary-go/api/uploader"
-	"github.com/cloudinary/cloudinary-go/v2"
+	"github.com/joel-CM/prueba_go_cloudinary/pkgcld"
 	"github.com/joho/godotenv"
 )
 
@@ -15,25 +12,15 @@ func init() {
 }
 
 func main() {
-	cld, cldErr := cloudinary.NewFromParams(os.Getenv("CLOUD"), os.Getenv("KEY"), os.Getenv("SECRET"))
-	if cldErr != nil {
-		fmt.Println("Error initialize cloudinary, " + cldErr.Error())
+	cld, ctx, initCldErr := pkgcld.Initialize()
+	if initCldErr != nil {
+		fmt.Println("Error initialize cloudinary, " + initCldErr.Error())
 	}
 
-	// context
-	ctx := context.Background()
-
-	uploadResult, uploadErr := cld.Upload.Upload(ctx, "https://avatars.githubusercontent.com/u/84867719", uploader.UploadParams{PublicID: "joel"})
-	if uploadErr != nil {
-		fmt.Println("error upload, " + uploadErr.Error())
+	urlImg, urlErr := pkgcld.Upload(ctx, cld, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvrxxc_aRuyD2mEd5PJf29VGwGJ50fzh1NJ1bwhpYCrw&s", "messi")
+	if urlErr != nil {
+		fmt.Println("Error: " + urlErr.Error())
 	}
 
-	fmt.Println("secure ulr: " + uploadResult.SecureURL)
-
-	// asset, assetErr := cld.Admin.Asset(ctx, admin.AssetParams{PublicID: "joel"})
-	// if assetErr != nil {
-	// 	fmt.Println("error asset, " + assetErr.Error())
-	// }
-
-	// fmt.Printf("asset name: %v, asset url: %v", asset.PublicID, asset.SecureURL)
+	fmt.Print(urlImg)
 }
