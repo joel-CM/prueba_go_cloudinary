@@ -17,10 +17,10 @@ func main() {
 		fmt.Println("Error initialize cloudinary, " + initCldErr.Error())
 	}
 
-	urlImg, urlErr := pkgcld.Upload(ctx, cld, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvrxxc_aRuyD2mEd5PJf29VGwGJ50fzh1NJ1bwhpYCrw&s", "messi")
+	urlImg, urlErr := pkgcld.Get(ctx, cld, "joel")
 	if urlErr != nil {
 		fmt.Println("Error: " + urlErr.Error())
 	}
 
-	fmt.Print(urlImg)
+	fmt.Println(urlImg)
 }
