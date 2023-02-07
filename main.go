@@ -17,11 +17,11 @@ func main() {
 		fmt.Println("Error initialize cloudinary, " + initCldErr.Error())
 	}
 
-	transforms := ""
+	transforms := "c_scale,w_500"
 	urlImg, urlErr := pkgcld.Transform(cld, transforms, "messi")
 	if urlErr != nil {
 		fmt.Print("Error: " + urlErr.Error())
 	}
 
-	fmt.Println(urlErr)
+	fmt.Println(urlImg)
 }
