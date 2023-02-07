@@ -12,15 +12,16 @@ func init() {
 }
 
 func main() {
-	cld, ctx, initCldErr := pkgcld.Initialize()
+	cld, _, initCldErr := pkgcld.Initialize()
 	if initCldErr != nil {
 		fmt.Println("Error initialize cloudinary, " + initCldErr.Error())
 	}
 
-	urlImg, urlErr := pkgcld.Upload(ctx, cld, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvrxxc_aRuyD2mEd5PJf29VGwGJ50fzh1NJ1bwhpYCrw&s", "messi")
+	transforms := ""
+	urlImg, urlErr := pkgcld.Transform(cld, transforms, "messi")
 	if urlErr != nil {
-		fmt.Println("Error: " + urlErr.Error())
+		fmt.Print("Error: " + urlErr.Error())
 	}
 
-	fmt.Print(urlImg)
+	fmt.Println(urlErr)
 }
